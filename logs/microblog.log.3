@@ -1,0 +1,104 @@
+2021-06-29 20:10:56,927 ERROR: Exception on /search [GET] [in /home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py:1454]
+Traceback (most recent call last):
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/connection/http_urllib3.py", line 251, in perform_request
+    response = self.pool.urlopen(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/home/dell/anaconda3/lib/python3.8/http/client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/dell/anaconda3/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/dell/anaconda3/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/dell/anaconda3/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/home/dell/anaconda3/lib/python3.8/http/client.py", line 950, in send
+    self.connect()
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f56f03c80a0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/dell/Documents/microblog/app/main/routes.py", line 151, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+  File "/home/dell/Documents/microblog/app/models.py", line 20, in search
+    ids, total = query_index(cls.__tablename__, expression, page, per_page)
+  File "/home/dell/Documents/microblog/app/search.py", line 19, in query_index
+    search = current_app.elasticsearch.search(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/client/utils.py", line 168, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/client/__init__.py", line 1670, in search
+    return self.transport.perform_request(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/transport.py", line 413, in perform_request
+    raise e
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/transport.py", line 381, in perform_request
+    status, headers_response, data = connection.perform_request(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/connection/http_urllib3.py", line 264, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7f56f03c80a0>: Failed to establish a new connection: [Errno 111] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7f56f03c80a0>: Failed to establish a new connection: [Errno 111] Connection refused)
+2021-06-29 20:11:24,097 ERROR: Exception on /search [GET] [in /home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py:1454]
+Traceback (most recent call last):
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/dell/Documents/microblog/app/main/routes.py", line 151, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+  File "/home/dell/Documents/microblog/app/models.py", line 20, in search
+    ids, total = query_index(cls.__tablename__, expression, page, per_page)
+  File "/home/dell/Documents/microblog/app/search.py", line 19, in query_index
+    search = current_app.elasticsearch.search(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/client/utils.py", line 168, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/client/__init__.py", line 1670, in search
+    return self.transport.perform_request(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/transport.py", line 415, in perform_request
+    raise e
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/transport.py", line 381, in perform_request
+    status, headers_response, data = connection.perform_request(
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/connection/http_urllib3.py", line 275, in perform_request
+    self._raise_error(response.status, raw_data)
+  File "/home/dell/Documents/microblog/venv/lib/python3.8/site-packages/elasticsearch/connection/base.py", line 330, in _raise_error
+    raise HTTP_EXCEPTIONS.get(status_code, TransportError)(
+elasticsearch.exceptions.NotFoundError: NotFoundError(404, 'index_not_found_exception', 'no such index [post]', post, index_or_alias)
